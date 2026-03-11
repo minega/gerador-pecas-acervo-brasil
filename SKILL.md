@@ -55,7 +55,26 @@ python <skill_dir>/scripts/importar_pasta_externa.py --origem "<caminho>" --modo
 
 - sem Python, orientar o usuário a copiar os arquivos manualmente para `acervo_pecas/entrada_novas/`.
 
-4. Extrair texto dos arquivos que serão reaproveitados:
+4. Para catalogar peças novas, preferir o ciclo automático:
+
+```text
+python <skill_dir>/scripts/catalogar_acervo.py --acervo acervo_pecas
+```
+
+Esse fluxo deve:
+
+- extrair texto;
+- classificar o tipo principal;
+- mover o original para `catalogadas/<tipo>/`;
+- criar `metadados/Pxxxx.md`;
+- atualizar `indices/indice_pecas.md`;
+- atualizar `indices/mapa_tipos.md`;
+- atualizar `tipos/<tipo>/ORIENTACOES.md`;
+- gerar plano pós-decisão quando houver `processo_integral`.
+
+5. Sem Python, o agente deve reproduzir manualmente o mesmo padrão estrutural.
+
+6. Extrair texto dos arquivos que serão reaproveitados:
 
 - com Python disponível:
 
@@ -65,9 +84,9 @@ python <skill_dir>/scripts/extract_legal_text.py --input acervo_pecas/entrada_no
 
 - sem Python, trabalhar diretamente com arquivos `.md` e `.txt` quando existirem e tratar PDFs/DOCXs como material a ser lido caso a caso, sem prometer extração automática.
 
-5. Classificar os arquivos lidos conforme `references/classificacao_tipos.md`.
-6. Redigir a peça ou análise usando primeiro o acervo do mesmo tipo, depois tipos relacionados e, por fim, os templates em `assets/templates/`.
-7. Antes da minuta final, verificar `references/dados_minimos_por_tipo.md` e devolver apenas:
+7. Classificar os arquivos lidos conforme `references/classificacao_tipos.md`.
+8. Redigir a peça ou análise usando primeiro o acervo do mesmo tipo, depois tipos relacionados e, por fim, os templates em `assets/templates/`.
+9. Antes da minuta final, verificar `references/dados_minimos_por_tipo.md` e devolver apenas:
    - `dados_confirmados`
    - `dados_faltantes`
    - `riscos_se_nao_informar`
@@ -77,6 +96,8 @@ python <skill_dir>/scripts/extract_legal_text.py --input acervo_pecas/entrada_no
 - "Organize minhas peças."
 - "Configure meu acervo para mim."
 - "Prepare o ambiente para começar a usar meu acervo."
+- "Catalogue minhas peças novas."
+- "Organize o que está em entrada_novas."
 - "Vou te passar uma pasta com petições."
 - "Criei uma contestação e quero guardar no acervo."
 - "Gere uma petição com base nas minhas peças."
@@ -113,6 +134,7 @@ Ler apenas o necessário:
 - `scripts/bootstrap_acervo.ps1`: cria a estrutura padrão em Windows sem depender de Python.
 - `scripts/bootstrap_acervo.cmd`: atalho para executar o bootstrap em Windows com duplo clique.
 - `scripts/importar_pasta_externa.py`: traz apenas arquivos novos/editados de uma pasta externa.
+- `scripts/catalogar_acervo.py`: executa a catalogação ponta a ponta das peças novas.
 - `scripts/extract_legal_text.py`: extrai texto de PDF, DOCX, TXT e MD para `.md`.
 - `scripts/gerar_plano_pos_decisao.py`: gera plano de providências para arquivos `processo_*.md`.
 
@@ -129,6 +151,7 @@ Ler apenas o necessário:
 - texto extraído em `acervo_pecas/texto_extraido/`
 - metadados em `acervo_pecas/metadados/`
 - índices atualizados em `acervo_pecas/indices/`
+- orientações por tipo atualizadas em `acervo_pecas/tipos/<tipo>/ORIENTACOES.md`
 
 ### Redação
 
@@ -146,5 +169,5 @@ Se o computador do usuário não tiver Python:
 
 - usar `bootstrap_acervo.ps1` ou `bootstrap_acervo.cmd`, preferencialmente executados pelo próprio Codex;
 - copiar manualmente as peças para `acervo_pecas/entrada_novas/`;
-- usar a skill principalmente como método de organização, classificação e redação;
+- usar a skill principalmente como método de organização, classificação e redação, mesmo quando a catalogação precisar ser reproduzida manualmente;
 - tratar os scripts em Python como opcionais, úteis apenas para automação adicional.

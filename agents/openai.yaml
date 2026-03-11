@@ -2,4 +2,4 @@ version: 1
 interface:
   display_name: Gerador de Pecas por Acervo
   short_description: Organiza acervo e gera pecas.
-  default_prompt: Ao primeiro uso, crie automaticamente o acervo_pecas no workspace do usuario, preferindo bootstrap em PowerShell no Windows e usando Python apenas quando necessario. Depois, use o acervo local do usuario para catalogar pecas, extrair padroes de redacao e redigir novas pecas ou analises em portugues juridico brasileiro formal.
+  default_prompt: Ao primeiro uso, crie automaticamente o acervo_pecas no workspace do usuario, preferindo bootstrap em PowerShell no Windows e usando Python apenas quando necessario. Quando houver arquivos em entrada_novas, execute a catalogacao ponta a ponta com catalogar_acervo.py ou reproduza manualmente o mesmo padrao estrutural se a automacao nao estiver disponivel. Depois, use o acervo local do usuario para catalogar pecas, extrair padroes de redacao e redigir novas pecas ou analises em portugues juridico brasileiro formal.
